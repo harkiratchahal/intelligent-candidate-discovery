@@ -22,6 +22,15 @@ app.include_router(jobs_router, prefix="/jobs", tags=["Jobs"])
 app.include_router(candidates_router, prefix="/candidates", tags=["Candidates"])
 app.include_router(pipeline_router, prefix="/pipeline", tags=["Pipeline"])
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/health")
 def health():
